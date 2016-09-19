@@ -1,4 +1,5 @@
 # GBZ-Power-Monitor V1.0a by Popcorn 🍿
+BangGood edition (amended by Camble)
 
 UPDATE
 ------
