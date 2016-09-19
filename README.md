@@ -36,21 +36,6 @@ Dependencies
 - omxplayer (comes installed with Retropie 3.7)
 - Must be run as a sudoer user (the default Pi user on Retropie 3.7 is a sudoer)
 
-Wiring Diagram
--------------
-![alt tag](http://i.imgur.com/FpPDcmK.png)
-Notes
-
-- The built-in slide switch on the Pololu switch in the diagram must be flipped into the off position to work
-- If using the alternate Pololu Mini Push Button LV, instead of using UART TX to the ON pin, map physical pin 7/GPIO4 to the OFF pin of the Pololu Push Button LV and add the following to the /boot/config.txt file
-```
-dtoverlay=gpio-poweroff,gpiopin=4
-```
-
-- the 2nd VOUT & GND from the Pololu switch (labeled Video DC) can go to the power strip from Wermy's [video guide 4](http://sudomod.com/game-boy-zero-guide-part-4/)
-- In Wermy's latest wiring [video guide number 4](http://sudomod.com/game-boy-zero-guide-part-4/), he wires the main power switch to be closed when OFF, this needs to be inverted for the Pololu switch.  Use the other pin on the switch which closes when ON (or just turn the switch around).  These will be mapped to the SW and GND pins of the Pololu instead. (or to A and B of the Pololu Push Button version)
-- If the latching emergency reset doesn't work, try mapping it to a shared ground.
-
 Installation
 -----------
 
@@ -63,7 +48,7 @@ ssh pi@retropie.local
 Default password is 'raspberry'.  Next at the command prompt, copy this monitor and the video assets with the following command:
 
 ```
-cd ~;git clone https://github.com/NullCorn/GBZ-Power-Monitor.git
+cd ~;git clone https://github.com/Camble/GBZ-Power-Monitor_BG.git
 ```
 
 Now, launch the Monitor manually and test that it's working properly
@@ -86,14 +71,6 @@ So, as I continue to tinker and add these things, you can make sure you have the
 ```
 cd ~/GBZ-Power-Monitor;git pull origin master
 ```
-
-FAQ
----
-**What is the purpose of the Latching Switch?**
-Since we are changing the way the PI powers down, by software, in case your Pi has a kernel panic or, for example, the monitor unexpectedly crashes, your pi will be stuck on and you'd have to get your screwdriver out to reset it. How annoying! So this was added as a way to do that. It's also used when you want to store the unit for longer periods of time, this lets you disconnect the batteries. The button should be recessed so it's not easily hit. ie: Mount it internally and drilling a pin hole where a paperclip is needed to hit it.
-
-**Do I have to use the Powerboost 1000C and not another type?**
-Maybe.  You could use other power supplies, however, if they do not have a Low Battery indictor like an LED or dedicated pinout, then you will lose the automatic Low Battery warnings and shutdowns, which one of the core functions of this monitor.  But even so, you could still use this for the dedicated power switch which would still gracefully shut down. You might have to reconfigure your emergency latching switch though.  Let us know about your success or failure stories!
 
 Video Examples
 --------------
