@@ -61,7 +61,7 @@ def powerSwitch(channel):
   for bounceSample in range(1, int(round(powerTimeout / sampleRate))):
     time.sleep(sampleRate)
 
-    if GPIO.input(powerGPIO) is 1:
+    if GPIO.input(powerGPIO) is 0:
        break
 
   if bounceSample is int(round(powerTimeout / sampleRate)) - 1:
