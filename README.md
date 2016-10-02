@@ -1,33 +1,17 @@
-# GBZ-Power-Monitor V1.0a by Popcorn 🍿
-BangGood edition (amended by Camble)
-
-UPDATE
-------
-There are multiple reports that [Camble](http://sudomod.com/forum/memberlist.php?mode=viewprofile&u=76)'s Graceful Shutdown hardware solution works perfectly and with the ability to close the EN pin on the Powerboost. Something that the Pololu solution cannot do which was annoying to some. So, I would strongly consider using [his hardware method](http://sudomod.com/forum/viewtopic.php?f=22&p=10968#p10968) if you have not already purchased a pololu switch. You can still use my monitor also with the low battery warning along with his solution (with a slight modification of one line of code). I will be testing the circuit and revising my instructions once I'm able to replicate everything and it's working well. Thanks!
-
-ORIGINAL POLOLU SOLUTION BELOW:
-
-This is a Power Management utlity which is primarily built for the [Gameboy Zero](http://sudomod.com/hi/) project.  This adds graceful shutdowns from the main power switch and automatic low battery alerts and shutdowns when the battery level is low.  This is meant to be used in concert with the provided list of required hardware and components within a Retropie 3.7+ environment.
-
-This solution will work in any portable battery powered raspberry PI unit that uses a Powerboost 1000C. So not only can this be applied to the Gameboy Zero project, but also to the Adafruit Pi Grrl and Pi Grrl 2 projects as well as a wide variety of portable retro gaming systems or IoT solutions that use the Raspberry Pi and a Powerboost 1000C
+# GBZ-Power-Monitor V1.0a by Popcorn
+BangGood/Generic edition (amended by Camble)
 
 Background
 ----------
 Currently in the GBZ, the power switch works like a normal On/Off switch. The only problem is when you cut the power, it's kinda hard on the system. There's no clean dismounting of the drives. It's really just like yanking the power out. And that's been known to cause corrupted files and disks.
 
-My goal is to add an inexpensive and small electronic switch that will take care of the killing the power part, but only after a clean shutdown process. After some research, both the Pololu Mini Pushbutton LV or the Pololu Mini Slider LV will both work and fits our needs. They are basically identical in size and price ($5) with a couple extra features on the pushbutton version.
-
-The main power switch will toggle ON the Pololu switch (but only ON, not off). Then, we need 3 GPIO pins mapped, one as output, and two as input. Once the unit is turned on, we use the built-in UART TX pin and send a signal to the ON pin of the electric switch which overrides it to remain on. (Alternatively, for the Pololu Mini Push Button switch, we use a GPIO pin mapped with the GPIO-Poweroff driver which maps to the OFF pin which tells the switch to shut off when we successfully power off). This ensures the system remains on until we are ready to shut it off. Another GPIO input pin will read the setting of the power switch, so we can tell when the user wants to shutdown. And lastly, the final GPIO input pin will go to the pin attached to the Low Battery LED of the Powerboost, so we can gracefully power down automatically when the battery is very low. A nice little add.
 
 Required Hardware and Components
 --------------------------------
 - [Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/) (or Model B+, Raspberry Pi 2 and Pi 3)
 - [Adafruit Powerboost 1000C](https://learn.adafruit.com/adafruit-powerboost-1000c-load-share-usb-charge-boost/overview)
-- [Pololu Mini Slide Switch LV](https://www.pololu.com/product/2810) or [Pololu Mini Push Button LV](https://www.pololu.com/product/2808)
-- [2N3904 NPN transistor](https://en.wikipedia.org/wiki/2N3904)
-- [47k resistor](http://resisto.rs/#47K)
-- A mini SPDT or DPDT latching push and hold switch (for emergency resets and prolonged storage)
-- Original DMG (or equivalant) SPDT Slide Power Switch
+- Safe Shutdown PCB (PowerBoost Edition)
+- A mini DPDT slide switch (SK-22H07 included with Safe Shutdown PCB) or an original DMG slide power switch.
 
 Dependencies
 -----------
@@ -45,7 +29,21 @@ You will need to connect the PI Zero to Wifi and from another computer on the sa
 ssh pi@retropie.local
 ```
 
-Default password is 'raspberry'.  Next at the command prompt, copy this monitor and the video assets with the following command:
+Default password is 'raspberry'. At the command prompt, edit the /boot/config.txt file:
+
+```
+sudo nano /boot/config.txt
+```
+
+Add the following line:
+
+```
+dtoverlay=gpio-poweroff,gpiopin=22,active_low="y"
+```
+
+Press Ctrl+X to exit, hit Y to save and press return.
+
+Next at the command prompt, copy this monitor and the video assets with the following command:
 
 ```
 cd ~;git clone https://github.com/Camble/GBZ-Power-Monitor_BG.git
