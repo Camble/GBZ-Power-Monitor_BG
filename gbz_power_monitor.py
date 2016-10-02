@@ -84,7 +84,7 @@ def main():
     lowBattery(batteryGPIO)
 
   #if the Power Switch is active when the program launches, handle it
-  if GPIO.input(powerGPIO) is 0:
+  if GPIO.input(powerGPIO) is 1:
     powerSwitch(powerGPIO)
 
   #Add threaded event listeners for the Low Battery and Power Switch
