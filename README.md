@@ -62,6 +62,8 @@ echo "@reboot     /usr/bin/nice -n 19 /usr/bin/python ~/GBZ-Power-Monitor_BG/gbz
 
 Keeping Up-to-Date
 ------------------
+You can make sure you have the latest updates by issuing this command
+
 ```
 cd ~/GBZ-Power-Monitor_BG;git pull origin master
 ```
