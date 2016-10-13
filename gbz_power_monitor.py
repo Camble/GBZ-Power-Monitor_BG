@@ -93,7 +93,7 @@ def main():
     GPIO.add_event_detect(batteryGPIO, GPIO.FALLING, callback=lowBattery, bouncetime=300)
 
     GPIO.remove_event_detect(powerGPIO)
-    GPIO.add_event_detect(powerGPIO, GPIO.FALLING, callback=powerSwitch, bouncetime=300)
+    GPIO.add_event_detect(powerGPIO, GPIO.RISING, callback=powerSwitch, bouncetime=300)
   except KeyboardInterrupt:
     GPIO.cleanup()
 
