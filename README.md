@@ -9,8 +9,8 @@ Currently in the GBZ, the power switch works like a normal On/Off switch. The on
 Required Hardware and Components
 --------------------------------
 - [Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/) (or Model B+, Raspberry Pi 2 and Pi 3)
-- [Adafruit Powerboost 1000C](https://learn.adafruit.com/adafruit-powerboost-1000c-load-share-usb-charge-boost/overview)
-- Safe Shutdown PCB (PowerBoost Edition)
+- A BangGood/GearBest power supply module or alternative
+- Safe Shutdown PCB (BangGood Edition)
 - A mini DPDT slide switch (SK-22H07 included with Safe Shutdown PCB) or an original DMG slide power switch.
 
 Dependencies
