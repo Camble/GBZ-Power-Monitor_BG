@@ -1,5 +1,5 @@
-# GBZ-Power-Monitor V1.0a by Popcorn
-BangGood/Generic edition (amended by Camble)
+# GBZ-Power-Monitor v1.0a
+BangGood/Generic edition
 
 Background
 ----------
