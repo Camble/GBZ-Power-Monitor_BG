@@ -44,7 +44,7 @@ def lowBattery(channel):
 
     #Discovered a bug with the Python GPIO library and threaded events.  Need to unbind and rebind after a System Call or the program will crash
     GPIO.remove_event_detect(batteryGPIO)
-    GPIO.add_event_detect(batteryGPIO, GPIO.BOTH, callback=lowBattery, bouncetime=300)
+    GPIO.add_event_detect(batteryGPIO, GPIO.FALLING, callback=lowBattery, bouncetime=300)
 
 def powerSwitch(channel):
   #Checking for LED bounce for the duration of the Power Timeout
