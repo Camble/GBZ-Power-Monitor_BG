@@ -21,7 +21,7 @@ lowalertVideo  = "~/GBZ-Power-Monitor_BG/lowbattalert.mp4"    # use no space or 
 playerFlag     = 0
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(batteryGPIO, GPIO.IN)
+GPIO.setup(batteryGPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(powerGPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def lowBattery(channel):
